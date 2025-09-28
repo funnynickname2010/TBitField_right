@@ -11,6 +11,7 @@
 
 TBitField::TBitField(size_t len)
 {
+
     BitLen = len;
     MemLen = this->GetMemIndex(len) + 1;
     pMem = new TELEM[MemLen];

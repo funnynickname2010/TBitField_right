@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Un-ignore needed source files
+!TBitField_right/
+!TBitField_right/src/
+!TBitField_right/test/
+!TBitField_right/src/tbitfield.cpp
+!TBitField_right/src/tset.cpp
+!TBitField_right/test/test_tbitfield.cpp
+!TBitField_right/test/test_tset.cpp
+
+# Un-ignore .gitignore itself
+!.gitignore
