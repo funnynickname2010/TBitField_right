@@ -5,7 +5,6 @@
 //
 // Битовое поле
 
-// What's this?
 #ifndef __BITFIELD_H__ 
 #define __BITFIELD_H__
 
@@ -17,42 +16,123 @@ using namespace std;
 
 typedef unsigned int TELEM;
 
+/**
+ * @brief Класс TBitField - битовое поле.
+ */
 class TBitField
 {
 private:
-  int  BitLen; // длина битового поля - макс. к-во битов
-  TELEM *pMem; // память для представления битового поля
-  int  MemLen; // к-во эл-тов Мем для представления бит.поля
+    int BitLen;      ///< длина битового поля - макс. к-во битов
+    TELEM *pMem;     ///< память для представления битового поля
+    int MemLen;      ///< к-во эл-тов pMem для представления бит.поля
 
-  // методы реализации
-  int   GetMemIndex(const int n) const noexcept; // индекс в pМем для бита n       (#О2)
-  TELEM GetMemMask (const int n) const noexcept; // битовая маска для бита n       (#О3)
+    /**
+     * @brief Получить индекс в pMem для бита n.
+     * @param n Номер бита.
+     * @return Индекс в массиве pMem.
+     */
+    int GetMemIndex(const int n) const;
+
+    /**
+     * @brief Получить битовую маску для бита n.
+     * @param n Номер бита.
+     * @return Маска для бита.
+     */
+    TELEM GetMemMask(const int n) const;
+
 public:
-  TBitField(size_t len);                // размер в битах                (#О1)
-  TBitField(const TBitField &bf);    //                                   (#П1)
-  ~TBitField();                      //                                    (#С)
+    /**
+     * @brief Конструктор битового поля.
+     * @param len Размер битового поля.
+     */
+    TBitField(size_t len);
 
-  // доступ к битам
-  int GetLength(void) const noexcept;      // получить длину (к-во битов)           (#О)
-  void SetBit(const int n) noexcept;       // установить бит                       (#О4)
-  void ClrBit(const int n) noexcept;       // очистить бит                         (#П2)
-  bool  GetBit(const int n) const noexcept; // получить значение бита               (#Л1)
+    /**
+     * @brief Конструктор копирования.
+     * @param bf Копируемое битовое поле.
+     */
+    TBitField(const TBitField &bf);
 
-  // битовые операции
-  bool operator==(const TBitField &bf) const; // сравнение                 (#О5)
-  bool operator!=(const TBitField &bf) const; // сравнение
-  TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
-  TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
-  TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
-  TBitField  operator~(void);                // отрицание                  (#С)
+    /**
+     * @brief Деструктор.
+     */
+    ~TBitField();
 
-  friend istream &operator>>(istream &istr, TBitField &bf);       //      (#О7)
-  friend ostream &operator<<(ostream &ostr, const TBitField &bf); //      (#П4)
+    /**
+     * @brief Получить длину битового поля.
+     * @return Длина (количество битов).
+     */
+    int GetLength(void) const noexcept;
+
+    /**
+     * @brief Установить бит.
+     * @param n Номер бита.
+     */
+    void SetBit(const int n);
+
+    /**
+     * @brief Очистить бит.
+     * @param n Номер бита.
+     */
+    void ClrBit(const int n);
+
+    /**
+     * @brief Получить значение бита.
+     * @param n Номер бита.
+     * @return true если бит установлен, иначе false.
+     */
+    bool GetBit(const int n) const;
+
+    /**
+     * @brief Оператор сравнения.
+     * @param bf Битовое поле для сравнения.
+     * @return true если поля равны.
+     */
+    bool operator==(const TBitField &bf) const noexcept;
+
+    /**
+     * @brief Оператор неравенства.
+     * @param bf Битовое поле для сравнения.
+     * @return true если поля не равны.
+     */
+    bool operator!=(const TBitField &bf) const noexcept;
+
+    /**
+     * @brief Оператор присваивания.
+     * @param bf Битовое поле для присваивания.
+     * @return Ссылка на текущее битовое поле.
+     */
+    TBitField& operator=(const TBitField &bf);
+
+    /**
+     * @brief Оператор "или".
+     * @param bf Второе битовое поле.
+     * @return Результат операции.
+     */
+    TBitField operator|(const TBitField &bf) const;
+
+    /**
+     * @brief Оператор "и".
+     * @param bf Второе битовое поле.
+     * @return Результат операции.
+     */
+    TBitField operator&(const TBitField &bf) const;
+
+    /**
+     * @brief Оператор отрицания.
+     * @return Результат операции.
+     */
+    TBitField operator~(void) const noexcept;
+
+    /**
+     * @brief Перегрузка оператора ввода.
+     */
+    friend istream &operator>>(istream &istr, TBitField &bf);
+
+    /**
+     * @brief Перегрузка оператора вывода.
+     */
+    friend ostream &operator<<(ostream &ostr, const TBitField &bf);
 };
-// Структура хранения битового поля
-//   бит.поле - набор битов с номерами от 0 до BitLen
-//   массив pМем рассматривается как последовательность MemLen элементов
-//   биты в эл-тах pМем нумеруются справа налево (от младших к старшим)
-// О8 Л2 П4 С2
 
-#endif
+#endif // __BITFIELD_H__
