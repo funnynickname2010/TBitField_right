@@ -198,18 +198,10 @@ bool TBitField::operator==(const TBitField& other) const noexcept
 
  const int bitsPerElem = sizeof(TELEM) * 8;
  const int fullElems = BitLen / bitsPerElem;
- const int remainingBits = BitLen % bitsPerElem;
 
   for (int i = 0; i < fullElems; ++i) 
   {
     if (pMem[i] != other.pMem[i])
-      return false;
-  }
-
-  if (remainingBits > 0) 
-  {
-    TELEM mask = (static_cast<TELEM>(1) << remainingBits) - 1;
-    if ((pMem[fullElems] & mask) != (other.pMem[fullElems] & mask))
       return false;
   }
 
