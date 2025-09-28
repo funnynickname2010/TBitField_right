@@ -23,7 +23,7 @@ class TBitField
 {
 private:
     int BitLen;      ///< длина битового поля - макс. к-во битов
-    TELEM *pMem;     ///< память для представления битового поля
+    TELEM* pMem;     ///< память для представления битового поля
     int MemLen;      ///< к-во эл-тов pMem для представления бит.поля
 
     /**
@@ -51,7 +51,7 @@ public:
      * @brief Конструктор копирования.
      * @param bf Копируемое битовое поле.
      */
-    TBitField(const TBitField &bf);
+    TBitField(const TBitField& bf);
 
     /**
      * @brief Деструктор.
@@ -88,35 +88,35 @@ public:
      * @param bf Битовое поле для сравнения.
      * @return true если поля равны.
      */
-    bool operator==(const TBitField &bf) const noexcept;
+    bool operator==(const TBitField& bf) const noexcept;
 
     /**
      * @brief Оператор неравенства.
      * @param bf Битовое поле для сравнения.
      * @return true если поля не равны.
      */
-    bool operator!=(const TBitField &bf) const noexcept;
+    bool operator!=(const TBitField& bf) const noexcept;
 
     /**
      * @brief Оператор присваивания.
      * @param bf Битовое поле для присваивания.
      * @return Ссылка на текущее битовое поле.
      */
-    TBitField& operator=(const TBitField &bf);
+    TBitField& operator=(const TBitField& bf);
 
     /**
      * @brief Оператор "или".
      * @param bf Второе битовое поле.
      * @return Результат операции.
      */
-    TBitField operator|(const TBitField &bf) const;
+    TBitField operator|(const TBitField& bf) const;
 
     /**
      * @brief Оператор "и".
      * @param bf Второе битовое поле.
      * @return Результат операции.
      */
-    TBitField operator&(const TBitField &bf) const;
+    TBitField operator&(const TBitField& bf) const;
 
     /**
      * @brief Оператор отрицания.
@@ -127,12 +127,12 @@ public:
     /**
      * @brief Перегрузка оператора ввода.
      */
-    friend istream &operator>>(istream &istr, TBitField &bf);
+    friend istream& operator>>(istream& istr, TBitField& bf);
 
     /**
      * @brief Перегрузка оператора вывода.
      */
-    friend ostream &operator<<(ostream &ostr, const TBitField &bf);
+    friend ostream& operator<<(ostream& ostr, const TBitField& bf);
 };
 
 #endif // __BITFIELD_H__

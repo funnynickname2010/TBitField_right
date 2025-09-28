@@ -13,9 +13,9 @@
  * @param maxPower Максимальная мощность множества.
  */
 TSet::TSet(size_t maxPower)
-  : bitField(maxPower)
+    : bitField(maxPower)
 {
-  this->maxPower = static_cast<int>(maxPower);
+    this->maxPower = static_cast<int>(maxPower);
 }
 
 /**
@@ -23,9 +23,9 @@ TSet::TSet(size_t maxPower)
  * @param other Копируемое множество.
  */
 TSet::TSet(const TSet& other)
-  : bitField(other.bitField)
+    : bitField(other.bitField)
 {
-  maxPower = other.maxPower;
+    maxPower = other.maxPower;
 }
 
 /**
@@ -33,9 +33,9 @@ TSet::TSet(const TSet& other)
  * @param bitField Битовое поле.
  */
 TSet::TSet(const TBitField& bitField)
-  : bitField(bitField)
+    : bitField(bitField)
 {
-  maxPower = bitField.GetLength();
+    maxPower = bitField.GetLength();
 }
 
 /**
@@ -44,7 +44,7 @@ TSet::TSet(const TBitField& bitField)
  */
 TSet::operator TBitField()
 {
-  return bitField;
+    return bitField;
 }
 
 /**
@@ -53,7 +53,7 @@ TSet::operator TBitField()
  */
 int TSet::GetMaxPower() const noexcept
 {
-  return maxPower;
+    return maxPower;
 }
 
 /**
@@ -64,7 +64,7 @@ int TSet::GetMaxPower() const noexcept
  */
 int TSet::IsMember(int elem) const
 {
-    if (elem < 0 || elem >= maxPower) 
+    if (elem < 0 || elem >= maxPower)
     {
         throw std::out_of_range("Wrong element index");
     }
@@ -78,7 +78,7 @@ int TSet::IsMember(int elem) const
  */
 void TSet::InsElem(int elem)
 {
-    if (elem < 0 || elem >= maxPower) 
+    if (elem < 0 || elem >= maxPower)
     {
         throw std::out_of_range("Wrong element index");
     }
@@ -92,7 +92,7 @@ void TSet::InsElem(int elem)
  */
 void TSet::DelElem(int elem)
 {
-    if (elem < 0 || elem >= maxPower) 
+    if (elem < 0 || elem >= maxPower)
     {
         throw std::out_of_range("Wrong element index");
     }
@@ -106,12 +106,12 @@ void TSet::DelElem(int elem)
  */
 TSet& TSet::operator=(const TSet& other)
 {
-  if (this != &other) 
-  {
-    maxPower = other.maxPower;
-    bitField = other.bitField;
-  }
-  return *this;
+    if (this != &other)
+    {
+        maxPower = other.maxPower;
+        bitField = other.bitField;
+    }
+    return *this;
 }
 
 /**
@@ -121,7 +121,7 @@ TSet& TSet::operator=(const TSet& other)
  */
 int TSet::operator==(const TSet& other) const
 {
-  return (maxPower == other.maxPower) && (bitField == other.bitField);
+    return (maxPower == other.maxPower) && (bitField == other.bitField);
 }
 
 /**
@@ -131,7 +131,7 @@ int TSet::operator==(const TSet& other) const
  */
 int TSet::operator!=(const TSet& other) const
 {
-  return !(*this == other);
+    return !(*this == other);
 }
 
 /**
@@ -141,10 +141,10 @@ int TSet::operator!=(const TSet& other) const
  */
 TSet TSet::operator+(const TSet& other)
 {
-  size_t resultMaxPower = std::max(maxPower, other.maxPower);
-  TSet result(resultMaxPower);
-  result.bitField = bitField | other.bitField;
-  return result;
+    size_t resultMaxPower = std::max(maxPower, other.maxPower);
+    TSet result(resultMaxPower);
+    result.bitField = bitField | other.bitField;
+    return result;
 }
 
 /**
@@ -155,7 +155,7 @@ TSet TSet::operator+(const TSet& other)
  */
 TSet TSet::operator+(int elem)
 {
-    if (elem < 0 || elem >= maxPower) 
+    if (elem < 0 || elem >= maxPower)
     {
         throw std::out_of_range("Wrong element index");
     }
@@ -172,7 +172,7 @@ TSet TSet::operator+(int elem)
  */
 TSet TSet::operator-(int elem)
 {
-    if (elem < 0 || elem >= maxPower) 
+    if (elem < 0 || elem >= maxPower)
     {
         throw std::out_of_range("Wrong element index");
     }
@@ -188,24 +188,24 @@ TSet TSet::operator-(int elem)
  */
 TSet TSet::operator*(const TSet& other)
 {
-  const size_t resultSetMaxPower = std::max(maxPower, other.maxPower);
-  const size_t resultSetMinPower = std::min(maxPower, other.maxPower);
-  TSet result(resultSetMaxPower);
+    const size_t resultSetMaxPower = std::max(maxPower, other.maxPower);
+    const size_t resultSetMinPower = std::min(maxPower, other.maxPower);
+    TSet result(resultSetMaxPower);
 
-  for (size_t i = 0; i < resultSetMinPower; ++i) 
-  {
-    if (bitField.GetBit(static_cast<int>(i)) && other.bitField.GetBit(static_cast<int>(i))) 
+    for (size_t i = 0; i < resultSetMinPower; ++i)
     {
-      result.bitField.SetBit(static_cast<int>(i));
+        if (bitField.GetBit(static_cast<int>(i)) && other.bitField.GetBit(static_cast<int>(i)))
+        {
+            result.bitField.SetBit(static_cast<int>(i));
+        }
     }
-  } 
 
-  for (size_t i = resultSetMinPower; i < resultSetMaxPower; ++i) 
-  {
-    result.bitField.ClrBit(static_cast<int>(i));
-  }
+    for (size_t i = resultSetMinPower; i < resultSetMaxPower; ++i)
+    {
+        result.bitField.ClrBit(static_cast<int>(i));
+    }
 
-  return result;
+    return result;
 }
 
 /**
@@ -214,9 +214,9 @@ TSet TSet::operator*(const TSet& other)
  */
 TSet TSet::operator~()
 {
-  TSet result(*this);
-  result.bitField = ~bitField;
-  return result;
+    TSet result(*this);
+    result.bitField = ~bitField;
+    return result;
 }
 
 /**
@@ -227,33 +227,33 @@ TSet TSet::operator~()
  */
 std::istream& operator>>(std::istream& istr, TSet& set)
 {
-  std::vector<int> inputVector;
-  int temp;
+    std::vector<int> inputVector;
+    int temp;
 
-  if (istr.peek() == '{') 
-  {
-    istr.ignore(1);
-  }
-
-  while (istr >> temp) 
-  {
-    inputVector.push_back(temp);
-    if (istr.peek() == ',') 
+    if (istr.peek() == '{')
     {
-      istr.ignore(1);
-    } 
-    else if (istr.peek() == '}') 
-    {
-      istr.ignore(1);
-      break;
+        istr.ignore(1);
     }
-  }
 
-  for (size_t i = 0; i < inputVector.size(); ++i) {
-    set.InsElem(inputVector[i]);
-  }
+    while (istr >> temp)
+    {
+        inputVector.push_back(temp);
+        if (istr.peek() == ',')
+        {
+            istr.ignore(1);
+        }
+        else if (istr.peek() == '}')
+        {
+            istr.ignore(1);
+            break;
+        }
+    }
 
-  return istr;
+    for (size_t i = 0; i < inputVector.size(); ++i) {
+        set.InsElem(inputVector[i]);
+    }
+
+    return istr;
 }
 
 /**
@@ -264,21 +264,21 @@ std::istream& operator>>(std::istream& istr, TSet& set)
  */
 std::ostream& operator<<(std::ostream& ostr, const TSet& set)
 {
-  ostr << '{';
-  bool first = true;
-  for (int i = 0; i < set.maxPower; ++i)
-  {
-    if (set.bitField.GetBit(i)) 
+    ostr << '{';
+    bool first = true;
+    for (int i = 0; i < set.maxPower; ++i)
     {
-      if (!first) 
-      {
-        ostr << ',';
-      }
-      ostr << i;
-      first = false;
+        if (set.bitField.GetBit(i))
+        {
+            if (!first)
+            {
+                ostr << ',';
+            }
+            ostr << i;
+            first = false;
+        }
     }
-  }
-  ostr << '}';
-  return ostr;
+    ostr << '}';
+    return ostr;
 }
 // ---------------------------------------------------------------------------
